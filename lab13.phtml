@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title>1-9</title>
+</head>
+<body>
+    <!--1,2-->
+    <form action="1.php" method="GET">
+        <label>
+            <input type="text" name="city">
+        </label>
+        <button type="submit">Отправить</button>
+    </form>
+    <!--3-->
+    <?php
+    if (!isset($_POST['submit'])) {
+    ?>
+    <form action="1.php" method="GET">
+        <label>
+            <input type="text" name="city">
+        </label>
+        <button type="submit">Отправить</button>
+    </form>
+    <?php
+    }
+    ?>
+    <!--4-->
+    <form action="2.php" method="GET">
+        <label>
+            <input type="text" name="name">
+        </label>
+        <button type="submit">Отправить</button>
+    </form>
+    <!--5-->
+    <form action="3.php" method="GET">
+        <label>
+            <input type="text" name="name">
+            <input type="text" name="age">
+        </label>
+        <textarea name="message"></textarea>
+        <button type="submit">Отправить</button>
+    </form>
+    <!--6-->
+    <?php
+    if (!isset($_POST['age'])) {
+    ?>
+    <form action="3.php" method="GET">
+        <label>
+            <input type="text" name="age">
+        </label>
+        <button type="submit">Отправить</button>
+    </form>
+    <?php
+    }
+    ?>
+    <?php
+        if (!isset($_POST['age'])) {
+            $age = strip_tags($_GET['age']);
+            echo "Ваш возраст: $age";
+        }
+    ?>
+    <!--7-->
+    <form action="4.php" method="GET">
+        <label>
+            <input type="text" name="login">
+            <input type="password" name="pswr">
+        </label>
+        <button type="submit">Отправить</button>
+    </form>
+    <!--8-->
+    <form action="5.php" method="GET">
+        <label>
+            <input name="name" value="<?php if (isset($_GET['name'])) {
+                echo $_GET['name'];
+            } ?>">
+        </label>
+        <button type="submit">Отправить</button>
+    </form>
+    <!--9-->
+    <form action="5.php" method="GET">
+        <label>
+            <input name="name" value="<?php if (isset($_GET['name'])) {
+                echo $_GET['name'];
+            } ?>">
+        </label>
+        <textarea name="message">
+            <?php
+                if (isset($_GET['message'])) {
+                    echo $_GET['message'];
+                }
+            ?>
+        </textarea>
+        <button type="submit">Отправить</button>
+    </form>
+</body>
+</html>
