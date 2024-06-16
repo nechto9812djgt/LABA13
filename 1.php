@@ -1,9 +1,5 @@
 <?php
-    $city = $_GET["city"];
+    $city = $_REQUEST["city"];
     echo 'Ваш город: '.$city;
-?>
-<?php
-    $city = strip_tags($_GET["city"]);
-    echo "Ваш город: $city";
 ?>
 

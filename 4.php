@@ -1,8 +1,8 @@
 <?php
     $login = 'popkich';
-    $pswr = '82475982759';
-    $Login = trim($_GET['login']);
-    $Pswr = trim($_GET['pswr']);
+    $pswr = '123';
+    $Login = trim($_REQUEST['login']);
+    $Pswr = trim($_REQUEST['pswr']);
     if ($login == $Login and $pswr == $Pswr) {
         echo "Доступ разрешен!";
     }
