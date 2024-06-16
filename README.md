@@ -69,94 +69,80 @@
         <p font-size = "12">Для выполнения этой лабораторной работы, я пользовалась:</p>
         <p> 1.  Материалом в сети интернет</p>
         </body>
-<h3 align = "center">Файл lab13.phtml</h3>
+<h3 align = "center">Файл lab13.html</h3>
 
 ```
 <!DOCTYPE html>
-<html lang="">
+<html lang="ru">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>1-9</title>
 </head>
 <body>
-    <!--1,2-->
+    <!--1-->
     <form action="1.php" method="GET">
-        <label>
-            <input type="text" name="city">
-        </label>
+        <input type="text" name="city">
         <button type="submit">Отправить</button>
     </form>
-    <!--3-->
-    <?php
-    if (!isset($_POST['submit'])) {
-    ?>
-    <form action="1.php" method="GET">
-        <label>
-            <input type="text" name="city">
-        </label>
+    <!--2--><br>
+    <form action="1_2.php" method="GET">
+        <input type="text" name="city">
         <button type="submit">Отправить</button>
     </form>
+    <!--3--><br>
     <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    } else {
+        ?>
+        <form action="1_2.php" method="GET">
+            <input type="text" name="city">
+            <button type="submit">Отправить</button>
+        </form>
+        <?php
     }
     ?>
-    <!--4-->
+    <!--4--><br>
     <form action="2.php" method="GET">
-        <label>
-            <input type="text" name="name">
-        </label>
+        <input type="text" name="name">
         <button type="submit">Отправить</button>
     </form>
-    <!--5-->
+    <!--5--><br>
     <form action="3.php" method="GET">
-        <label>
-            <input type="text" name="name">
-            <input type="text" name="age">
-        </label>
-        <textarea name="message"></textarea>
-        <button type="submit">Отправить</button>
+        <input type="text" name="name"><br>
+        <input type="number" name="age"><br>
+        <textarea name="message"></textarea><br>
+        <button type="submit" name="submit">Отправить</button>
     </form>
-    <!--6-->
+    <!--6--><br>
     <?php
-    if (!isset($_POST['age'])) {
+    if (!isset($_REQUEST['age'])) {
     ?>
-    <form action="3.php" method="GET">
-        <label>
-            <input type="text" name="age">
-        </label>
+    <form action="3_2.php" method="GET">
+        <input type="number" name="age">
         <button type="submit">Отправить</button>
     </form>
     <?php
     }
     ?>
-    <?php
-        if (!isset($_POST['age'])) {
-            $age = strip_tags($_GET['age']);
-            echo "Ваш возраст: $age";
-        }
-    ?>
-    <!--7-->
+    <!--7--><br>
     <form action="4.php" method="GET">
-        <label>
             <input type="text" name="login">
             <input type="password" name="pswr">
-        </label>
         <button type="submit">Отправить</button>
     </form>
-    <!--8-->
+    <!--8--><br>
     <form action="5.php" method="GET">
-        <label>
-            <input name="name" value="<?php if (isset($_GET['name'])) {
-                echo $_GET['name'];
-            } ?>">
-        </label>
+        <input name="name" value="<?php if (isset($_GET['name']))
+            echo $_GET['name'];
+        ?>">
         <button type="submit">Отправить</button>
     </form>
-    <!--9-->
+    <!--9--><br>
     <form action="5.php" method="GET">
-        <label>
-            <input name="name" value="<?php if (isset($_GET['name'])) {
-                echo $_GET['name'];
-            } ?>">
-        </label>
+        <input name="name" value="<?php if (isset($_GET['name']))
+            echo $_GET['name'];
+        ?>">
         <textarea name="message">
             <?php
                 if (isset($_GET['message'])) {
@@ -176,6 +162,10 @@
     $city = $_GET["city"];
     echo 'Ваш город: '.$city;
 ?>
+```
+<h3 align = "center">Файл 1_2.php</h3>
+
+```
 <?php
     $city = strip_tags($_GET["city"]);
     echo "Ваш город: $city";
@@ -193,22 +183,31 @@
 
 ```
 <?php
-    if (isset($_GET['submit'])) {
-        $age = strip_tags($_GET['age']);
-        $name = strip_tags($_GET['name']);
-        $message = strip_tags($_GET['message']);
-        echo "Привет, $name, $age\n$message";
+    if (isset($_REQUEST['submit'])) {
+        $age = strip_tags($_REQUEST['age']);
+        $name = strip_tags($_REQUEST['name']);
+        $message = strip_tags($_REQUEST['message']);
+        echo "Привет, $name, $age<br>Твое сообщение:<br>$message";
     }
 ?>
+```
+<h3 align = "center">Файл 3_2.php</h3>
+
+```
+<?php
+if(isset($_REQUEST['age'])){
+    $age = strip_tags($_REQUEST['age']);
+    echo "Ваш возраст: $age";
+}
 ```
 <h3 align = "center">Файл 4.php</h3>
 
 ```
 <?php
     $login = 'popkich';
-    $pswr = '82475982759';
-    $Login = trim($_GET['login']);
-    $Pswr = trim($_GET['pswr']);
+    $pswr = '123';
+    $Login = trim($_REQUEST['login']);
+    $Pswr = trim($_REQUEST['pswr']);
     if ($login == $Login and $pswr == $Pswr) {
         echo "Доступ разрешен!";
     }
@@ -217,11 +216,11 @@
     }
 ?>
 ```
-<h3 align = "center">Файл 4.php</h3>
+<h3 align = "center">Файл 5.php</h3>
 
 ```
 <?php
-    $name = $_GET['name'];
+    $name = $_REQUEST['name'];
     echo $name;
 ?>
 ```
@@ -321,6 +320,25 @@
     print $str1;
 ?>
 ```
+<h2 align = "center">Результат HTML</h2>
+<div style="display: flex; flex-direction: column">
+    <p>Исходник</p>
+    <img height="350px" width="350px" src="img/1.png">
+    <p>Задания 1-3</p>
+    <img height="350px" width="600px" src="img/2.png">
+    <p>Задание 4</p>
+    <img height="350px" width="600px" src="img/3.png">
+    <p>Задание 5</p>
+    <img height="350px" width="600px"src="img/4.png">
+    <p>Задание 6</p>
+    <img height="350px" width="600px" src="img/5.png">
+    <p>Задание 7, если ввести popkich 123</p>
+    <img height="350px" width="600px" src="img/6.png">
+    <p>Задание 7, если ввести что-то иное</p>
+    <img height="350px" width="600px" src="img/7.png">
+    <p>Задания 8,9</p>
+    <img height="350px" width="600px" src="img/8.png">
+</div>
 </html>
 <br>
  <h2 align = "center">Вывод</h2>
